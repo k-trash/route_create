@@ -11,4 +11,7 @@ class routeGui{
 	private:
 		void drawRobot(const double *position);
 		void setWidget(void);
+
+		GtkWidget *window;
+		GtkWidget *canvas;
 };
