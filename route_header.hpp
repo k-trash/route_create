@@ -1,14 +1,14 @@
-// Ver1.0.0 2021/04/06 k-trash
+// Ver1.0.0 2021/04/07 k-trash
 
 #pragma once
 
 constexpr bool X = 0;
 constexpr bool Y = 1;
 
-class routeMake{
+class RouteMake{
 	public:
 		routeMake(void);
-		bool searchRoute(const double *now_vel_, double *next_vel_);
+		bool searchVel(const double *now_vel_, double *next_vel_);
 		void setMaxVel(double max_vel_);
 		void setMaxAcc(double max_acc_);
 		void setDirect(const double *target_point_, const double *now_point_);
