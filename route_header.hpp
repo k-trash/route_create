@@ -1,4 +1,4 @@
-// Ver1.0.0 2021/04/07 k-trash
+// Ver1.0.0 2021/04/08 k-trash
 
 #pragma once
 
@@ -13,7 +13,7 @@ class RouteMake{
 		void setMaxAcc(double max_acc_);
 		void setDirect(const double *target_point_, const double *now_point_);
 	private:
-		double getTheta(const double *vec_1_, const double vec_2_);
+		void getDirect(const double *robot_vel_, double *acc_dir);
 		double getVecAbs(const double *vec_);
 
 		double max_vel, max_acc;

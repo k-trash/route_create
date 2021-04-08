@@ -1,4 +1,4 @@
-// Ver1.0.0 2021/04/07 k-trash
+// Ver1.0.0 2021/04/08 k-trash
 
 #include <gtk_gtk.h>
 #include "route_gui.hpp"
@@ -27,7 +27,7 @@ void RouteGui::drawRobot(const double *position_){
 	cairo_destroy(cr);
 }
 
-void RouteGui::setWdget(void){
+void RouteGui::setWidget(void){
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_widget_set_size_request(window, 600, 300);
 	g_signal_connect(G_OBJECT(window), canvas);

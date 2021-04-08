@@ -1,4 +1,4 @@
-// Ver1.0.0 2021/04/07 k-trash
+// Ver1.0.0 2021/04/08 k-trash
 
 #include <cmath>
 #include "route_header.hpp"
@@ -9,19 +9,24 @@ RouteMake::routeMake(void){
 }
 
 bool RouteMake::searchVel(const double *now_vel_, double *next_vel_){
-	double theta, next_abs;
-	
+	double next_abs;
+	double acc_dir[2];
+
 	if(getVecAbs(vec_dir) == 0.0f){
 		next_vel_[X] = next_vel_[Y] = 0.0f;
 		return false;
 	}else if(getVecAbs(now_vel_) == 0.0f){
-		theta = atan2(vec_dir[X], vec_dir[Y];
+		acc_dir[X] = vec_dir[X]*max_acc/getVecAbs(vec_dir);
+		acc_dir[Y] = vec_dir[Y]*max_acc/getVecAbs(vec_dir);
 	}else{
-		theta = atan2(vec_dir[X], vec_dir[Y]) - getTheta(vec_dir, now_vel_);
+		getDirect(now_vel_, acc_dir);
+		next_abs = getVecAbs(acc_dir);
+		acc_dir[X] = acc_dir[X]*max_acc/next_abs;
+		acc_dir[Y] = acc_dir[Y]*max_acc/next_abs;
 	}
 
-	next_vel_[X] = now_vel_[X] + (max_acc * cos(theta));
-	next_vel_[Y] = now_vel_[Y] + (max_acc * cos(theta));
+	next_vel_[X] = now_vel_[X] + acc_dir[X];
+	next_vel_[Y] = now_vel_[Y] + acc_dir[Y];
 
 	next_abs = getVecAbs(next_vel_);
 	if(next_abs > max_vel){
@@ -45,8 +50,11 @@ void RouteMake::setDirect(const double *target_point_, const double *now_point_)
 	vec_dir[Y] = target_point_[Y] - now_point_[Y];
 }
 
-double RouteMake::getTheta(const double *vec_1_, const double *vec_2_){
-	return acos(((vec_1_[X]*vec_2_[X])+(vec_1_[Y]*vec_2_[Y]))/(getVecAbs(vec_1_)*getVecAbs(vec_2_)));
+void RouteMake::getDirect(const double *robot_vel_, double *acc_dir_){
+	double con_mat = 1.0f/((vec_dir[X]*vec_dir[X])+(vec_dir[Y]*vec_dir[Y]));
+	
+	acc_dir_[X] = con_mat*((((vec_dir[X]*vec_dir[X])-(vec_dir[Y]*vec_dir[Y]))*robot_vel_[X])+(2.0f*vec_dir[X]*vec_dir[Y]*robot_vel_[Y]));
+	acc_dir_[Y] = con_mat*((2.0f*vec_dir[X]*vec_dir[Y]*robot_vel_[X])-(((vec_dir[X]*vec_dir[X])-(vec_dir[Y]*vec_dir[Y]))*robot_vel_[Y]));
 }
 
 double RouteMake::getVecAbs(const double *vec_){
