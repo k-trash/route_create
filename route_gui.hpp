@@ -7,7 +7,7 @@
 
 class RouteGui{
 	public:
-		routeGui(void);
+		RouteGui(void);
 		gboolean moveRobot(gpointer user_data_);
 		void setWidget(void);
 		

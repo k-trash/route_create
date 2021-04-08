@@ -3,7 +3,7 @@
 #include <cmath>
 #include "route_header.hpp"
 
-RouteMake::routeMake(void){
+RouteMake::RouteMake(void){
 	max_vel = max_acc = 0.0f;
 	vel_dir[0] = vel_dir[1] = 0.0f;
 }

@@ -1,12 +1,16 @@
 // Ver 1.0.0 2021/04/08 k-trash
 
 #include <gtk/gtk.h>
+#include <time.h>
 #include "route_gui.hpp"
 #include "route_header.hpp"
 
+RouteGui RouteCreater;
+
+gboolean callFunc(gpointer user_data_);
+
 int main(int argc, char *argv[]){
 	double places[2];
-	RouteGui RouteCreater;
 
 	gtk_init(&argc, &argv);
 
@@ -18,10 +22,16 @@ int main(int argc, char *argv[]){
 	places[Y] = 50.0f;
 	RouteCreater.RouteMaker.setDirect(places, RouteCreater.robot_place);
 
-	g_time_add(500, (GSourceFunc)RouteCreater.moveRobot, NULL);
+	g_timeout_add(500, (GSourceFunc)callFunc, NULL);
 
-	gtk_widget_shoe_all(RouteCreater.window);
+	gtk_widget_show_all(RouteCreater.window);
 	gtk_main();
 
 	return 0;
+}
+
+gboolean callFunc(gpointer user_data_){
+	RouteCreater.moveRobot(NULL);
+
+	return TRUE;
 }

@@ -7,7 +7,7 @@ constexpr bool Y = 1;
 
 class RouteMake{
 	public:
-		routeMake(void);
+		RouteMake(void);
 		bool searchVel(const double *now_vel_, double *next_vel_);
 		void setMaxVel(double max_vel_);
 		void setMaxAcc(double max_acc_);

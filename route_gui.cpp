@@ -1,16 +1,16 @@
 // Ver1.0.0 2021/04/08 k-trash
 
-#include <gtk_gtk.h>
+#include <gtk/gtk.h>
 #include "route_gui.hpp"
 #include "route_header.hpp"
 
-RouteGui::routeGui(void){
+RouteGui::RouteGui(void){
 	robot_place[X] = robot_place[Y] = 0.0f;
 	now_vel = 0.0f;
 }
 
 gboolean RouteGui::moveRobot(gpointer user_data_){
-	double robot_vel[2] = {0.0f}
+	double robot_vel[2] = {0.0f};
 	RouteMaker.searchVel(now_vel, robot_vel);
 	robot_place[X] += robot_vel[X]*0.5f;
 	robot_place[Y] += robot_vel[Y]*0.5f;
@@ -39,5 +39,7 @@ void RouteGui::drawRobot(const double *position_){
 void RouteGui::setWidget(void){
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_widget_set_size_request(window, 600, 300);
-	g_signal_connect(G_OBJECT(window), canvas);
+	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quite), NULL);
+	canvas = gtk_drawing_area_new();
+	gtk_container_add(GTK_CONTAINER(window), canvas);
 }
