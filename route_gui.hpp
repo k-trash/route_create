@@ -1,4 +1,4 @@
-// Ver1.0.0 2021/04/07 k-trash
+// Ver1.0.0 2021/04/08 k-trash
 
 #pragma once
 
@@ -8,9 +8,12 @@
 class RouteGui{
 	public:
 		routeGui(void);
-		void moveRobot(double max_vel_, double max_acc_);
+		gboolean moveRobot(gpointer user_data_);
 
 		RouteMake RouteMaker;
+
+		double robot_place[2];
+		double now_vel;
 	private:
 		void drawRobot(const double *position_);
 		void setWidget(void);

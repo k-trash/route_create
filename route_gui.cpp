@@ -5,11 +5,20 @@
 #include "route_header.hpp"
 
 RouteGui::routeGui(void){
-
+	robot_place[X] = robot_place[Y] = 0.0f;
+	now_vel = 0.0f;
 }
 
-void RouteGui::moveRobot(double max_vel_, double max_acc_){
+gboolean RouteGui::moveRobot(gpointer user_data_){
+	double robot_vel[2] = {0.0f}
+	RouteMaker.searchVel(now_vel, robot_vel);
+	robot_place[X] += robot_vel[X]*0.5f;
+	robot_place[Y] += robot_vel[Y]*0.5f;
 	
+	now_vel[X] = robot_vel[X];
+	now_vel[Y] = robot_vel[Y];
+
+	drawRobot(robot_place);
 }
 
 void RouteGui::drawRobot(const double *position_){
