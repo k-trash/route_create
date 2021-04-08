@@ -9,15 +9,15 @@ class RouteGui{
 	public:
 		routeGui(void);
 		gboolean moveRobot(gpointer user_data_);
-
+		void setWidget(void);
+		
 		RouteMake RouteMaker;
 
+		GtkWidget *window;
 		double robot_place[2];
 		double now_vel;
 	private:
 		void drawRobot(const double *position_);
-		void setWidget(void);
 
-		GtkWidget *window;
 		GtkWidget *canvas;
 };
