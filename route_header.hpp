@@ -8,13 +8,14 @@ constexpr bool Y = 1;
 class RouteMake{
 	public:
 		RouteMake(void);
-		bool searchVel(double const *now_vel_, double *next_vel_);
+		bool searchVel(const double *now_vel_, double *next_vel_);
 		void setMaxVel(double max_vel_);
 		void setMaxAcc(double max_acc_);
 		void setDirect(const double *target_point_, const double *now_point_);
 	private:
 		void getDirect(const double *robot_vel_, double *acc_dir);
 		double getVecAbs(const double *vec_);
+		double getVecInner(const double *vec_1_, const double *vec_2_);
 
 		double max_vel, max_acc;
 		double vec_dir[2];

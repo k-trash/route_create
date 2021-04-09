@@ -1,24 +1,31 @@
 // Ver1.0.0 2021/04/08 k-trash
 
 #include <gtk/gtk.h>
+#include <iostream>
 #include "route_gui.hpp"
 #include "route_header.hpp"
 
 RouteGui::RouteGui(void){
 	robot_place[X] = robot_place[Y] = 0.0f;
-	now_vel[X] = now_vel[Y] = 0.0f;
+	now_vel[X] = 0.0f;
+	now_vel[Y] = 0.0f;
+	target_place[X] = target_place[Y] = 0.0f;
 }
 
 gboolean RouteGui::moveRobot(gpointer user_data_){
 	double robot_vel[2] = {0.0f};
+	
+	RouteMaker.setDirect(target_place, robot_place);
 	RouteMaker.searchVel(now_vel, robot_vel);
-	robot_place[X] += robot_vel[X]*0.5f;
-	robot_place[Y] += robot_vel[Y]*0.5f;
+	robot_place[X] += robot_vel[X];
+	robot_place[Y] += robot_vel[Y];
 	
 	now_vel[X] = robot_vel[X];
 	now_vel[Y] = robot_vel[Y];
 
 	drawRobot(robot_place);
+
+	std::cout << robot_place[X] << '\t' << robot_place[Y] << std::endl;
 }
 
 void RouteGui::drawRobot(const double *position_){

@@ -8,7 +8,7 @@ RouteMake::RouteMake(void){
 	vec_dir[0] = vec_dir[1] = 0.0f;
 }
 
-bool RouteMake::searchVel(double const *now_vel_, double *next_vel_){
+bool RouteMake::searchVel(const double *now_vel_, double *next_vel_){
 	double next_abs;
 	double acc_dir[2];
 
@@ -18,6 +18,8 @@ bool RouteMake::searchVel(double const *now_vel_, double *next_vel_){
 	}else if(getVecAbs(now_vel_) == 0.0f){
 		acc_dir[X] = vec_dir[X]*max_acc/getVecAbs(vec_dir);
 		acc_dir[Y] = vec_dir[Y]*max_acc/getVecAbs(vec_dir);
+	}else if(getVecInner(now_vel_, vec_dir) < 0.0f){
+		
 	}else{
 		getDirect(now_vel_, acc_dir);
 		next_abs = getVecAbs(acc_dir);
@@ -29,10 +31,10 @@ bool RouteMake::searchVel(double const *now_vel_, double *next_vel_){
 	next_vel_[Y] = now_vel_[Y] + acc_dir[Y];
 
 	next_abs = getVecAbs(next_vel_);
-	if(next_abs > max_vel){
-		next_vel_[X] = next_vel_[X] * max_vel / next_abs;
-		next_vel_[Y] = next_vel_[Y] * max_vel / next_abs;
-	}
+	//if(next_abs > max_vel){
+	//	next_vel_[X] = next_vel_[X] * max_vel / next_abs;
+	//	next_vel_[Y] = next_vel_[Y] * max_vel / next_abs;
+	//}
 
 	return true;
 }
@@ -59,4 +61,8 @@ void RouteMake::getDirect(const double *robot_vel_, double *acc_dir_){
 
 double RouteMake::getVecAbs(const double *vec_){
 	return sqrt((vec_[0]*vec_[0])+(vec_[1]*vec_[1]));
+}
+
+double RouteMake::getVecInner(const double *vec_1_, const double *vec_2_){
+	return (vec_1_[X]*vec_2_[X]+vec_1_[Y]*vec_2_[Y]);
 }

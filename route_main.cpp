@@ -15,14 +15,16 @@ int main(int argc, char *argv[]){
 	gtk_init(&argc, &argv);
 
 	RouteCreater.setWidget();
-	RouteCreater.RouteMaker.setMaxVel(5.0f);
+	RouteCreater.RouteMaker.setMaxVel(10.0f);
 	RouteCreater.RouteMaker.setMaxAcc(2.0f);
 	
-	places[X] = 100.0f;
-	places[Y] = 50.0f;
-	RouteCreater.RouteMaker.setDirect(places, RouteCreater.robot_place);
+	//places[X] = 100.0f;
+	//places[Y] = 50.0f;
+	RouteCreater.target_place[X] = 100.0f;
+	RouteCreater.target_place[Y] = 50.0f;
+	//RouteCreater.RouteMaker.setDirect(places, RouteCreater.robot_place);
 
-	g_timeout_add(500, (GSourceFunc)callFunc, NULL);
+	g_timeout_add(250, (GSourceFunc)callFunc, NULL);
 
 	gtk_widget_show_all(RouteCreater.window);
 	gtk_main();
