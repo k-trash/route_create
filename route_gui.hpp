@@ -15,7 +15,7 @@ class RouteGui{
 
 		GtkWidget *window;
 		double robot_place[2];
-		double now_vel;
+		double now_vel[2];
 	private:
 		void drawRobot(const double *position_);
 

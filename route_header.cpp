@@ -5,10 +5,10 @@
 
 RouteMake::RouteMake(void){
 	max_vel = max_acc = 0.0f;
-	vel_dir[0] = vel_dir[1] = 0.0f;
+	vec_dir[0] = vec_dir[1] = 0.0f;
 }
 
-bool RouteMake::searchVel(const double *now_vel_, double *next_vel_){
+bool RouteMake::searchVel(double const *now_vel_, double *next_vel_){
 	double next_abs;
 	double acc_dir[2];
 
@@ -58,5 +58,5 @@ void RouteMake::getDirect(const double *robot_vel_, double *acc_dir_){
 }
 
 double RouteMake::getVecAbs(const double *vec_){
-	return sqrt((vec_[0]*vec_[0])+(vec_[1]*vec[1]));
+	return sqrt((vec_[0]*vec_[0])+(vec_[1]*vec_[1]));
 }

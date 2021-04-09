@@ -6,7 +6,7 @@
 
 RouteGui::RouteGui(void){
 	robot_place[X] = robot_place[Y] = 0.0f;
-	now_vel = 0.0f;
+	now_vel[X] = now_vel[Y] = 0.0f;
 }
 
 gboolean RouteGui::moveRobot(gpointer user_data_){
@@ -39,7 +39,7 @@ void RouteGui::drawRobot(const double *position_){
 void RouteGui::setWidget(void){
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_widget_set_size_request(window, 600, 300);
-	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quite), NULL);
+	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
 	canvas = gtk_drawing_area_new();
 	gtk_container_add(GTK_CONTAINER(window), canvas);
 }
