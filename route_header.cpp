@@ -19,7 +19,9 @@ bool RouteMake::searchVel(const double *now_vel_, double *next_vel_){
 		acc_dir[X] = vec_dir[X]*max_acc/getVecAbs(vec_dir);
 		acc_dir[Y] = vec_dir[Y]*max_acc/getVecAbs(vec_dir);
 	}else if(getVecInner(now_vel_, vec_dir) < 0.0f){
-		
+		next_abs = getVecAbs(now_vel_);
+		acc_dir[X] = -now_vel_[X]*max_acc/next_abs;
+		acc_dir[Y] = -now_vel_[Y]*max_acc/next_abs;
 	}else{
 		getDirect(now_vel_, acc_dir);
 		next_abs = getVecAbs(acc_dir);
