@@ -8,7 +8,7 @@
 class RouteGui{
 	public:
 		RouteGui(void);
-		gboolean moveRobot(gpointer user_data_);
+		bool moveRobot(gpointer user_data_);
 		void setWidget(void);
 		
 		RouteMake RouteMaker;

@@ -12,7 +12,7 @@ RouteGui::RouteGui(void){
 	target_place[X] = target_place[Y] = 0.0f;
 }
 
-gboolean RouteGui::moveRobot(gpointer user_data_){
+bool RouteGui::moveRobot(gpointer user_data_){
 	double robot_vel[2] = {0.0f};
 	
 	RouteMaker.setDirect(target_place, robot_place);
@@ -25,7 +25,12 @@ gboolean RouteGui::moveRobot(gpointer user_data_){
 
 	drawRobot(robot_place);
 
-	std::cout << now_vel[X] << '\t' << now_vel[Y] << std::endl;
+	if(RouteMaker.getVecAbs(RouteMaker.vec_dir) < 1.0f){
+		return true;
+	}else{
+		return false;
+	}
+	//std::cout << now_vel[X] << '\t' << now_vel[Y] << std::endl;
 }
 
 void RouteGui::drawRobot(const double *position_){

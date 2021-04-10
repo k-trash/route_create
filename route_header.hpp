@@ -12,11 +12,12 @@ class RouteMake{
 		void setMaxVel(double max_vel_);
 		void setMaxAcc(double max_acc_);
 		void setDirect(const double *target_point_, const double *now_point_);
+		double getVecAbs(const double *vec_);
+		
+		double vec_dir[2];
 	private:
 		void getDirect(const double *robot_vel_, double *acc_dir);
-		double getVecAbs(const double *vec_);
 		double getVecInner(const double *vec_1_, const double *vec_2_);
 
 		double max_vel, max_acc;
-		double vec_dir[2];
 };
