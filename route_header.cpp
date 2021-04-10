@@ -33,10 +33,10 @@ bool RouteMake::searchVel(const double *now_vel_, double *next_vel_){
 	next_vel_[Y] = now_vel_[Y] + acc_dir[Y];
 
 	next_abs = getVecAbs(next_vel_);
-	//if(next_abs > max_vel){
-	//	next_vel_[X] = next_vel_[X] * max_vel / next_abs;
-	//	next_vel_[Y] = next_vel_[Y] * max_vel / next_abs;
-	//}
+	if(next_abs > max_vel){
+		next_vel_[X] = next_vel_[X] * max_vel / next_abs;
+		next_vel_[Y] = next_vel_[Y] * max_vel / next_abs;
+	}
 
 	return true;
 }

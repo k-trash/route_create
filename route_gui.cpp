@@ -7,7 +7,7 @@
 
 RouteGui::RouteGui(void){
 	robot_place[X] = robot_place[Y] = 0.0f;
-	now_vel[X] = 0.0f;
+	now_vel[X] = -5.0f;
 	now_vel[Y] = 0.0f;
 	target_place[X] = target_place[Y] = 0.0f;
 }
@@ -25,7 +25,7 @@ gboolean RouteGui::moveRobot(gpointer user_data_){
 
 	drawRobot(robot_place);
 
-	std::cout << robot_place[X] << '\t' << robot_place[Y] << std::endl;
+	std::cout << now_vel[X] << '\t' << now_vel[Y] << std::endl;
 }
 
 void RouteGui::drawRobot(const double *position_){

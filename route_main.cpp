@@ -15,8 +15,8 @@ int main(int argc, char *argv[]){
 	gtk_init(&argc, &argv);
 
 	RouteCreater.setWidget();
-	RouteCreater.RouteMaker.setMaxVel(10.0f);
-	RouteCreater.RouteMaker.setMaxAcc(2.0f);
+	RouteCreater.RouteMaker.setMaxVel(5.0f);
+	RouteCreater.RouteMaker.setMaxAcc(0.50f);
 	
 	//places[X] = 100.0f;
 	//places[Y] = 50.0f;
