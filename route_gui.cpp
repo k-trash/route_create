@@ -5,16 +5,28 @@
 #include "route_header.hpp"
 
 RouteGui::RouteGui(void){
-	robot_place[X] = robot_place[Y] = 0.0f;
-	now_vel[X] = -5.0f;
+	robot_place[X] = 0.0f;
+	robot_place[Y] = 30.0f;
+	now_vel[X] = 0.0f;
 	now_vel[Y] = 0.0f;
 	target_place[X] = target_place[Y] = 0.0f;
 }
 
-bool RouteGui::moveRobot(gpointer user_data_){
+bool RouteGui::moveRobot(bool p_flag_){
 	double robot_vel[2] = {0.0f};
-	
+	double p_max_vel = 0.0f;
+
 	RouteMaker.setDirect(target_place, robot_place);
+	
+	if(p_flag_){
+		p_max_vel = RouteMaker.getVecAbs(RouteMaker.vec_dir);
+		p_max_vel /= 2.0f;
+		if(p_max_vel > 5.0f){
+			p_max_vel = 5.0f;
+		}
+		RouteMaker.setMaxVel(p_max_vel);
+	}
+		
 	RouteMaker.searchVel(now_vel, robot_vel);
 	robot_place[X] += robot_vel[X];
 	robot_place[Y] += robot_vel[Y];
@@ -24,7 +36,7 @@ bool RouteGui::moveRobot(gpointer user_data_){
 
 	drawRobot(robot_place);
 
-	if(RouteMaker.getVecAbs(RouteMaker.vec_dir) < 1.0f){
+	if(RouteMaker.getVecAbs(RouteMaker.vec_dir) < 3.0f){
 		return true;
 	}else{
 		return false;
