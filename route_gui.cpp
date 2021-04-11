@@ -1,7 +1,6 @@
-// Ver1.0.0 2021/04/08 k-trash
+// Ver1.0.0 2021/04/11 k-trash
 
 #include <gtk/gtk.h>
-#include <iostream>
 #include "route_gui.hpp"
 #include "route_header.hpp"
 
@@ -30,7 +29,6 @@ bool RouteGui::moveRobot(gpointer user_data_){
 	}else{
 		return false;
 	}
-	//std::cout << now_vel[X] << '\t' << now_vel[Y] << std::endl;
 }
 
 void RouteGui::drawRobot(const double *position_){
@@ -41,7 +39,7 @@ void RouteGui::drawRobot(const double *position_){
 	cairo_set_line_width(cr, 1.0f);
 
 	cairo_set_source_rgb(cr, 0.0f, 0.0f, 0.0f);
-	cairo_rectangle(cr, int(position_[X]+15.0f), int(position_[X]+15.0f), 30, 30);
+	cairo_rectangle(cr, int(position_[X]+15.0f), int(position_[Y]+15.0f), 30, 30);
 
 	cairo_stroke(cr);
 

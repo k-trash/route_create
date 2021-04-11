@@ -1,7 +1,6 @@
-// Ver 1.0.0 2021/04/08 k-trash
+// Ver 1.0.0 2021/04/11 k-trash
 
 #include <gtk/gtk.h>
-#include <iostream>
 #include <time.h>
 #include "route_gui.hpp"
 #include "route_header.hpp"
@@ -19,11 +18,8 @@ int main(int argc, char *argv[]){
 	RouteCreater.RouteMaker.setMaxVel(5.0f);
 	RouteCreater.RouteMaker.setMaxAcc(0.50f);
 	
-	//places[X] = 100.0f;
-	//places[Y] = 50.0f;
-	RouteCreater.target_place[X] = 150.0f;
+	RouteCreater.target_place[X] = 100.0f;
 	RouteCreater.target_place[Y] = 50.0f;
-	//RouteCreater.RouteMaker.setDirect(places, RouteCreater.robot_place);
 
 	g_timeout_add(250, (GSourceFunc)callFunc, NULL);
 
@@ -37,7 +33,6 @@ gboolean callFunc(gpointer user_data_){
 	if(RouteCreater.moveRobot(NULL)){
 		RouteCreater.target_place[X] = 200.0f;
 		RouteCreater.target_place[Y] = 25.0f;
-		std::cout << "get" << std::endl;
 	}
 
 	return TRUE;
